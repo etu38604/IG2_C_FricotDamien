@@ -5,11 +5,12 @@
 	#define FIINSCRIPTIONS "Inscriptions.dat"
 	
 	#define TTXT		150
-	
-			// à compléter
 
 	#define PAUSE getchar()
 	#define CLEAR system("cls")
+	#define NB_MATRICULE_MAX 999999
+	#define NB_CHAR_NOM_MAX 80
+	#define NB_CHAR_PRENOM_MAX 30
 
 	typedef enum codeErreur CodeErreur;
 	enum codeErreur {
@@ -42,5 +43,42 @@
 		AFFICHER_INSCRIPTIONS,
 		QUITTER
 	};
+
+	typedef struct shifts Shifts;
+	struct shifts
+	{
+		int date;
+		int heure;
+		int nbDoublette;
+		Inscriptions *pInscriptions;
+		Shifts *pSuiv;
+
+	};
+
+	typedef struct inscriptions Inscriptions;
+	struct inscription
+	{
+		int matricule1;
+		int matricule2;
+		int categorie;
+		Inscriptions *pSuiv;
+	};
+
+	typedef struct fiOrgShift FiOrgShift;
+	struct fiOrgShift
+	{
+		int date;
+		int heure;
+	};
+
+	typedef struct fiMembres FiMembres;
+	struct fiMembres
+	{
+		int matricule;
+		char nom[NB_CHAR_NOM_MAX];
+		char prenom[NB_CHAR_PRENOM_MAX];
+		int moyPrec;
+	};
+
 #endif
 
