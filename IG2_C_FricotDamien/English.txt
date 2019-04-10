@@ -1,0 +1,6 @@
+﻿1001MAIN MENU
+1002ADD A TEAM 
+1003DELETE A TEAM
+1004PRINT
+1005QUIT                       
+// todo

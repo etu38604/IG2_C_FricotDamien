@@ -1,0 +1,31 @@
+1001MENU PRINCIPAL                 
+1002AJOUTER UNE INSCRIPTION 
+1003SUPPRIMER UNE INSCRIPTION
+1004IMPRIMER            
+1005QUITTER                       
+2001Date du shift choisi (format AAAAMMJJ) :
+2002Heure du shift choisi (format HHMM) : 
+2003Numero de matricule : 
+2004Recommencer ? (1. Oui | 0. Non) : 
+2005Choix : 
+3000GESTION DES INSCRIPTIONS
+3001INSCRIPTION
+3002IMPRESSIOIN
+3101AJOUT D'UNE DOUBLETTE
+3102SUPPRESSION D'UNE DOUBLETTE
+3301LISTE DES MEMBRES
+3401SAUVEGARDE EN COURS...
+5001Ce choix n'est pas disponible !
+5002Membre inconnu...
+5003Ce membre est deja inscrit dans une autre doublette !
+5004Ce shift est complet !
+5005Aucun shift propose !
+5006Ce shift n'esxiste pas !
+5007Ce n'est pas une doublette valide...
+5008Aucune doublette inscrite a ce shift !
+5009Fichier vide !
+5010Operation annulee...
+5011Une doublette doit etre composee de deux membres différents !
+5012Tous les shifts sont complets !
+5101Erreur SYSTEME : plus de place mémoire... Le programme va s'arreter !
+5102Erreur SYSTEME : erreur lors de l'ouverture du fichier... Le programme va s'arreter !
