@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "Constantes.h"
+#include "Fichier.h"
+
+
 
 
 CodeErreur initialiserShifts(Shifts ** pDebShifts)
@@ -13,11 +16,13 @@ CodeErreur initialiserShifts(Shifts ** pDebShifts)
 	{
 		if (premierefois)
 		{
-			codeErreur = chargerDatesOrgShifts();
+			printf("premiere fois");
+			codeErreur = chargerDatesOrgShifts(&pDebShifts);
 			// charger date Orgs Shifts
 		}
 		else
 		{
+			printf("not premiere fois");
 			// charger inscription
 		}
 	}
@@ -27,13 +32,13 @@ CodeErreur detecterFichierShifts(bool *premierefois)
 {
 	CodeErreur codeErreur = PAS_D_ERREUR;
 	FILE *fInscriptions;
-	fopen_s(&fInscriptions, "inscriptions.dat", "rb");
+	fopen_s(&fInscriptions, INSCRIPTION, "rb");
 
 	if (fInscriptions == NULL)
 	{
 		premierefois = true;
 		FILE *fDatesOrgShifts;
-		fopen_s(&fDatesOrgShifts, "datesOrgShifts.dat", "rb");
+		fopen_s(&fDatesOrgShifts, DATESORGSHIFT, "rb");
 		if (fDatesOrgShifts == NULL)
 		{
 			codeErreur = PROBS_OUVERTURE;
@@ -53,15 +58,34 @@ CodeErreur detecterFichierShifts(bool *premierefois)
 CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts)
 {
 	FILE *pDebOrgShifts;
-	fopen_s(&pDebOrgShifts, "datesOrgShifts.dat", "rb");
+	fopen_s(&pDebOrgShifts, DATESORGSHIFT, "rb");
 	CodeErreur codeErreur = PAS_D_ERREUR;
-	FILE *pDebShifts = NULL;
-	FILE *pShiftsSauv = NULL;
-	FiOrgShift fiOrgShifts = shiftsLu();
+	(*pDebShifts) = NULL;
+	Shifts *pShiftsSauv = NULL;
+	Shifts *pShiftsNouv = NULL;
+	FiOrgShift fiOrgShift;
+
+	// Shift lu	
+	fread_s(&fiOrgShift, sizeof(int), sizeof(int), 1, pDebOrgShifts); // ou alors fiOrgShift.date
+
+	int nbDoublette = 0;
+	
+	while ((!feof(pDebOrgShifts)) && (codeErreur = PAS_D_ERREUR))
+	{
+		codeErreur = nouveauShift(&pShiftsNouv);
+		if (codeErreur = PAS_D_ERREUR)
+		{
+			nbDoublette++;
+			// ajouter shift
+			ajouterShift(&pDebShifts, &pShiftsNouv, &pShiftsSauv,fiOrgShift,nbDoublette);
+			
+			// shift Lu
+			fread_s(&fiOrgShift, sizeof(int), sizeof(int), 1, pDebOrgShifts);
+		}
+	}
+	
+	fclose(pDebOrgShifts);
 }
 
-FiOrgShift shiftsLu()
-{
 
-}
 

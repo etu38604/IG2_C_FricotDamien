@@ -44,6 +44,15 @@
 		QUITTER
 	};
 
+	typedef struct inscriptions Inscriptions;
+	struct inscription
+	{
+		int matricule1;
+		int matricule2;
+		int categorie;
+		Inscriptions *pSuiv;
+	};
+
 	typedef struct shifts Shifts;
 	struct shifts
 	{
@@ -55,14 +64,6 @@
 
 	};
 
-	typedef struct inscriptions Inscriptions;
-	struct inscription
-	{
-		int matricule1;
-		int matricule2;
-		int categorie;
-		Inscriptions *pSuiv;
-	};
 
 	typedef struct fiOrgShift FiOrgShift;
 	struct fiOrgShift
