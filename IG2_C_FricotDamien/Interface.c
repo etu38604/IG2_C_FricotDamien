@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "Constantes.h"
 
-
+/*
 
 
 CodeErreur ajouterInscription(Shifts ** pDebShifts)
@@ -44,3 +44,6 @@ CodeErreur ajouterInscription(Shifts ** pDebShifts)
 		}
 	}
 }
+
+
+*/

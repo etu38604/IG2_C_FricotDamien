@@ -10,14 +10,17 @@
 CodeErreur initialiserShifts(Shifts ** pDebShifts)
 {
 	CodeErreur codeErreur = PAS_D_ERREUR;
+	printf("\n initialiser shifts");
 	bool premierefois = true;
 	codeErreur = detecterFichierShifts(&premierefois);
-	if (codeErreur = PAS_D_ERREUR)
+	printf("\n code erreur = %d \n", codeErreur);
+	if (codeErreur == PAS_D_ERREUR)
 	{
 		if (premierefois)
 		{
 			printf("premiere fois");
 			codeErreur = chargerDatesOrgShifts(&pDebShifts);
+
 			// charger date Orgs Shifts
 		}
 		else
@@ -26,10 +29,12 @@ CodeErreur initialiserShifts(Shifts ** pDebShifts)
 			// charger inscription
 		}
 	}
+	return codeErreur;
 }
 
 CodeErreur detecterFichierShifts(bool *premierefois)
 {
+	printf("\n détecter fichier shifts \n");
 	CodeErreur codeErreur = PAS_D_ERREUR;
 	FILE *fInscriptions;
 	fopen_s(&fInscriptions, INSCRIPTION, "rb");
@@ -53,10 +58,12 @@ CodeErreur detecterFichierShifts(bool *premierefois)
 		premierefois = false;
 		fclose(fInscriptions);
 	}
+	return codeErreur;
 }
 
 CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts)
 {
+	printf("\n charger dates org shifts \n");
 	FILE *pDebOrgShifts;
 	fopen_s(&pDebOrgShifts, DATESORGSHIFT, "rb");
 	CodeErreur codeErreur = PAS_D_ERREUR;
@@ -70,14 +77,15 @@ CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts)
 
 	int nbDoublette = 0;
 	
-	while ((!feof(pDebOrgShifts)) && (codeErreur = PAS_D_ERREUR))
+	while ((!feof(pDebOrgShifts)) && (codeErreur == PAS_D_ERREUR))
 	{
 		codeErreur = nouveauShift(&pShiftsNouv);
-		if (codeErreur = PAS_D_ERREUR)
+		if (codeErreur == PAS_D_ERREUR)
 		{
 			nbDoublette++;
 			// ajouter shift
-			ajouterShift(&pDebShifts, &pShiftsNouv, &pShiftsSauv,fiOrgShift,nbDoublette);
+			ajouterShift(pDebShifts, &pShiftsNouv, &pShiftsSauv,fiOrgShift,nbDoublette);
+			//printf("date = %d   heure = %d  nb doublette = %d ", pShiftsNouv->date, pShiftsNouv->heure, pShiftsNouv->nbDoublette);
 			
 			// shift Lu
 			fread_s(&fiOrgShift, sizeof(int), sizeof(int), 1, pDebOrgShifts);
@@ -85,6 +93,7 @@ CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts)
 	}
 	
 	fclose(pDebOrgShifts);
+	return codeErreur;
 }
 
 
