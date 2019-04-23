@@ -7,6 +7,8 @@
 #include "Constantes.h"
 
 CodeErreur nouveauShift(Shifts ** pShiftsNouv);
-void ajouterShift(Shifts ** pDebShifts, Shifts  *pShiftsNouv, Shifts * pShiftsSauv, FiOrgShift fiOrgShift, int nbDoublette);
+void ajouterShift(Shifts ** pDebShifts, Shifts  *pShiftsNouv, Shifts * pShiftsSauv, FiOrgShift fiOrgShift);
+CodeErreur nouveauMembre(Membres ** pMembreNouv);
+void ajouterMembre(Membres ** pDebMembres, Membres  *pMembresNouv, Membres * pMembresSauv, FiMembres fiMembres);
 
 #endif

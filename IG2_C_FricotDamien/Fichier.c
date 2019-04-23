@@ -76,16 +76,16 @@ CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts)
 	// Problème lors de la lecture du fichier : donnée non cohérente
 	fread_s(&fiOrgShift, sizeof(FiOrgShift), sizeof(FiOrgShift), 1, pDebOrgShifts); 
 	printf("ficher : date -> %d  heure -> %d  \n \n", fiOrgShift.date, fiOrgShift.heure);
-	int nbDoublette = 0;
+	
 	
 	while ((!feof(pDebOrgShifts)) && (codeErreur == PAS_D_ERREUR))
 	{
 		codeErreur = nouveauShift(&pShiftsNouv);
 		if (codeErreur == PAS_D_ERREUR)
 		{
-			nbDoublette++;
+			
 			// ajouter shift
-			ajouterShift(pDebShifts, pShiftsNouv, pShiftsSauv,fiOrgShift,nbDoublette);
+			ajouterShift(pDebShifts, pShiftsNouv, pShiftsSauv,fiOrgShift);
 			printf("date = %d   heure = %d  nb doublette = %d \n \n ", pShiftsNouv->date, pShiftsNouv->heure, pShiftsNouv->nbDoublette);
 			
 			// shift Lu
@@ -96,6 +96,38 @@ CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts)
 	}
 	
 	fclose(pDebOrgShifts);
+	return codeErreur;
+}
+
+CodeErreur chargerMembres(Membres **pDebMembres)
+{
+	printf("\n charger membres \n");
+	FILE *pDebFiMembres;
+	fopen_s(&pDebFiMembres, MEMBRE, "rb");
+	CodeErreur codeErreur = PAS_D_ERREUR;
+	(*pDebMembres) = NULL;
+	Membres *pMembresSauv = NULL;
+	Membres *pMembresNouv = NULL;
+	FiMembres fiMembres;
+
+	fread_s(&fiMembres, sizeof(Membres), sizeof(Membres), 1, pDebFiMembres);
+	printf("ficher : matricule -> %d  nom -> %d prenom -> %d moyenne -> %d  \n \n", fiMembres.matricule, fiMembres.nom, fiMembres.prenom, fiMembres.moyPrec);
+
+	while ((!feof(pDebMembres)) && (codeErreur == PAS_D_ERREUR))
+	{
+		codeErreur = nouveauMembre(&pMembresNouv);
+		if (codeErreur == PAS_D_ERREUR)
+		{
+			ajouterMembre(pDebMembres, pMembresNouv, pMembresSauv, fiMembres);
+			//printf(" matricule -> %d  nom -> %d prenom -> %d moyenne -> %d  \n \n", pMembresNouv->matricule, pMembresNouv->nom, pMembresNouv->prenom, pMembresNouv->moyPrec);
+
+			// shift Lu
+			fread_s(&fiMembres, sizeof(FiMembres), sizeof(FiMembres), 1, pDebFiMembres);
+			//printf("ficher : matricule -> %d  nom -> %d prenom -> %d moyenne -> %d  \n \n", fiMembres.matricule, fiMembres.nom, fiMembres.prenom, fiMembres.moyPrec);
+
+		}
+	}
+	fclose(pDebFiMembres);
 	return codeErreur;
 }
 

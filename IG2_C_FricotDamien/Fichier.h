@@ -2,7 +2,8 @@
 #define FICHIER_H
 
 #define INSCRIPTION "inscriptions.dat"
-#define DATESORGSHIFT "datesOrgShifts.dat"
+#define DATESORGSHIFT "DatesOrgShifts.dat"
+#define MEMBRE "MembresFSBB.dat"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -12,5 +13,7 @@
 CodeErreur initialiserShifts(Shifts ** pDebShifts);
 CodeErreur detecterFichierShifts(bool *premierefois);
 CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts);
+CodeErreur chargerMembres(Membres **pDebMembres);
+
 
 #endif // !FICHIER_H
