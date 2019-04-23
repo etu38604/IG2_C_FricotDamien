@@ -72,9 +72,10 @@ CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts)
 	Shifts *pShiftsNouv = NULL;
 	FiOrgShift fiOrgShift;
 
-	// Shift lu	
-	fread_s(&fiOrgShift, sizeof(int), sizeof(int), 1, pDebOrgShifts); // ou alors fiOrgShift.date
 
+	// Problème lors de la lecture du fichier : donnée non cohérente
+	fread_s(&fiOrgShift, sizeof(FiOrgShift), sizeof(FiOrgShift), 1, pDebOrgShifts); 
+	printf("ficher : date -> %d  heure -> %d  \n \n", fiOrgShift.date, fiOrgShift.heure);
 	int nbDoublette = 0;
 	
 	while ((!feof(pDebOrgShifts)) && (codeErreur == PAS_D_ERREUR))
@@ -84,11 +85,13 @@ CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts)
 		{
 			nbDoublette++;
 			// ajouter shift
-			ajouterShift(pDebShifts, &pShiftsNouv, &pShiftsSauv,fiOrgShift,nbDoublette);
-			//printf("date = %d   heure = %d  nb doublette = %d ", pShiftsNouv->date, pShiftsNouv->heure, pShiftsNouv->nbDoublette);
+			ajouterShift(pDebShifts, pShiftsNouv, pShiftsSauv,fiOrgShift,nbDoublette);
+			printf("date = %d   heure = %d  nb doublette = %d \n \n ", pShiftsNouv->date, pShiftsNouv->heure, pShiftsNouv->nbDoublette);
 			
 			// shift Lu
-			fread_s(&fiOrgShift, sizeof(int), sizeof(int), 1, pDebOrgShifts);
+			fread_s(&fiOrgShift, sizeof(FiOrgShift), sizeof(FiOrgShift), 1, pDebOrgShifts); 
+			printf("ficher : date -> %d  heure -> %d  \n \n", fiOrgShift.date, fiOrgShift.heure);
+
 		}
 	}
 	

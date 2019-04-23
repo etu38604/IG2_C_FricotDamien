@@ -28,11 +28,14 @@ void ajouterShift(Shifts ** pDebShifts, Shifts  *pShiftsNouv, Shifts * pShiftsSa
 	pShiftsNouv->pInscriptions = NULL;
 	pShiftsNouv->pSuiv = NULL;
 
-	if (pShiftsSauv == (*pDebShifts)) {
-		(*pDebShifts) = pShiftsNouv;
+	if (pShiftsSauv != NULL) {
+		
+		pShiftsSauv->pSuiv = pShiftsNouv;
+		
 	}
 	else {
-		pShiftsSauv->pSuiv = pShiftsNouv;
+		pDebShifts = pShiftsNouv;
+		
 	}
 
 	  pShiftsSauv = pShiftsNouv;

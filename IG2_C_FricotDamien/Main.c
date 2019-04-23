@@ -11,14 +11,6 @@ void main(void)
 	Shifts *pDebShifts = NULL;
 	codeErreur = initialiserShifts(&pDebShifts);
 	printf("\n code de l'erreur = %d \n", codeErreur);
-	Shifts *pSauvShifts;
-	pSauvShifts = pDebShifts;
-	while (pSauvShifts != NULL)
-	{
-		printf("\n test \n");
-		printf("date = %d   heure = %d  nb doublette = %d \n", pSauvShifts->date, pSauvShifts->heure, pSauvShifts->nbDoublette);
-		pSauvShifts = pSauvShifts->pSuiv;
-	}
 	printf("\ n Fin INIT \n");
 	
 	
