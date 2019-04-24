@@ -8,5 +8,5 @@
 
 CodeErreur nouveauShift(Shifts ** pShiftsNouv);
 void ajouterShift(Shifts ** pDebShifts, Shifts  *pShiftsNouv, Shifts * pShiftsSauv, FiOrgShift fiOrgShift);
-CodeErreur nouveauMembre(Membres *(*membres)[1]);
+CodeErreur nouveauMembre(Membres **pMembre);
 #endif

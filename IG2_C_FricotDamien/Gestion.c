@@ -42,14 +42,15 @@ void ajouterShift(Shifts ** pDebShifts, Shifts  *pShiftsNouv, Shifts * pShiftsSa
 }
 
 
-CodeErreur nouveauMembre(Membres *(*membres)[1])
+CodeErreur nouveauMembre(Membres **pMembre)
 {
-	membres = malloc(1, sizeof(Membres));
-	if ((membres) != NULL)
+	(*pMembre) = (Membres*)malloc(sizeof(Membres));
+	if ((*pMembre) != NULL)
 	{
 		return PAS_D_ERREUR;
 	}
 	else {
 		return ALLOCATION_MEMOIRE;
 	}
+	
 }
