@@ -79,7 +79,7 @@
 		char nom[NB_CHAR_NOM_MAX];
 		char prenom[NB_CHAR_PRENOM_MAX];
 		int moyPrec;
-		Membres *pSuiv;
+		
 	};
 
 	typedef struct fiMembres FiMembres;

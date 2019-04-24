@@ -73,7 +73,7 @@ CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts)
 	FiOrgShift fiOrgShift;
 
 
-	// Problème lors de la lecture du fichier : donnée non cohérente
+	// Problème lors de la lecture du fichier
 	fread_s(&fiOrgShift, sizeof(FiOrgShift), sizeof(FiOrgShift), 1, pDebOrgShifts); 
 	printf("ficher : date -> %d  heure -> %d  \n \n", fiOrgShift.date, fiOrgShift.heure);
 	
@@ -99,34 +99,42 @@ CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts)
 	return codeErreur;
 }
 
-CodeErreur chargerMembres(Membres **pDebMembres)
+CodeErreur chargementMembres(Membres *(*membres)[1],int nbMembre)
 {
 	printf("\n charger membres \n");
+	
 	FILE *pDebFiMembres;
 	fopen_s(&pDebFiMembres, MEMBRE, "rb");
 	CodeErreur codeErreur = PAS_D_ERREUR;
-	(*pDebMembres) = NULL;
-	Membres *pMembresSauv = NULL;
-	Membres *pMembresNouv = NULL;
 	FiMembres fiMembres;
+	nbMembre = 0;
 
-	fread_s(&fiMembres, sizeof(Membres), sizeof(Membres), 1, pDebFiMembres);
+
+	fread_s(&fiMembres, sizeof(FiMembres), sizeof(FiMembres), 1, pDebFiMembres);
 	printf("ficher : matricule -> %d  nom -> %d prenom -> %d moyenne -> %d  \n \n", fiMembres.matricule, fiMembres.nom, fiMembres.prenom, fiMembres.moyPrec);
-
-	while ((!feof(pDebMembres)) && (codeErreur == PAS_D_ERREUR))
+	
+	while ((!feof(pDebFiMembres)) && (codeErreur == PAS_D_ERREUR))
 	{
-		codeErreur = nouveauMembre(&pMembresNouv);
+		codeErreur = NouveauMembre(&membres);
+
 		if (codeErreur == PAS_D_ERREUR)
 		{
-			ajouterMembre(pDebMembres, pMembresNouv, pMembresSauv, fiMembres);
-			//printf(" matricule -> %d  nom -> %d prenom -> %d moyenne -> %d  \n \n", pMembresNouv->matricule, pMembresNouv->nom, pMembresNouv->prenom, pMembresNouv->moyPrec);
+			
+			membres[nbMembre][0]->matricule = fiMembres.matricule;
+			strcpy_s(membres[nbMembre][0]->nom, NB_CHAR_NOM_MAX, fiMembres.nom);
+			strcpy_s(membres[nbMembre][0]->prenom, NB_CHAR_PRENOM_MAX, fiMembres.prenom);
+			membres[nbMembre][0]->moyPrec = fiMembres.moyPrec;
 
 			// shift Lu
 			fread_s(&fiMembres, sizeof(FiMembres), sizeof(FiMembres), 1, pDebFiMembres);
 			//printf("ficher : matricule -> %d  nom -> %d prenom -> %d moyenne -> %d  \n \n", fiMembres.matricule, fiMembres.nom, fiMembres.prenom, fiMembres.moyPrec);
-
+			
 		}
+		nbMembre++;
 	}
+
+	printf(" matricule -> %d  nom -> %d prenom -> %d moyenne -> %d  \n \n", membres[1][0]->matricule, membres[1][0]->nom, membres[1][0]->prenom, membres[1][0]->moyPrec);
+
 	fclose(pDebFiMembres);
 	return codeErreur;
 }

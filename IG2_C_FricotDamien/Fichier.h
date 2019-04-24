@@ -13,7 +13,7 @@
 CodeErreur initialiserShifts(Shifts ** pDebShifts);
 CodeErreur detecterFichierShifts(bool *premierefois);
 CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts);
-CodeErreur chargerMembres(Membres **pDebMembres);
+CodeErreur chargementMembres(Membres(*membres)[4], int nbMembre);
 
 
 #endif // !FICHIER_H
