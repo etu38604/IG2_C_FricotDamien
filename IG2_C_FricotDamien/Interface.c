@@ -1,8 +1,34 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "Constantes.h"
 
+
+int langueLue()
+{
+	int langue = 0;
+	bool selection = false;
+
+	while (!selection)
+	{
+		printf_s(" 1 : French \n");
+		printf_s(" 2 : English \n");
+		scanf_s("%u", langue);
+
+		if ((langue == 1) || (langue == 2))
+		{
+			selection = true;
+		}
+		else
+		{
+			printf_s("selection not correct \n Please select the right number \n");
+
+		}
+	}
+
+	return langue;
+}
 /*
 
 

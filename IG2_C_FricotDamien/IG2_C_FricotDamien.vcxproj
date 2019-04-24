@@ -160,6 +160,7 @@
     <ClInclude Include="Constantes.h" />
     <ClInclude Include="Fichier.h" />
     <ClInclude Include="Gestion.h" />
+    <ClInclude Include="Interface.h" />
     <ClInclude Include="Lexique.h" />
   </ItemGroup>
   <ItemGroup>

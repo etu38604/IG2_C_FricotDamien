@@ -109,7 +109,7 @@ CodeErreur chargementMembres(Membres (*membres[]),int nbMembre)
 	Membres fiMembres;
 
 	fread_s(&fiMembres, sizeof(Membres), sizeof(Membres), 1, pDebFiMembres);
-	printf("ficher : matricule -> %d  nom -> %d prenom -> %d moyenne -> %d  \n \n", fiMembres.matricule, fiMembres.nom, fiMembres.prenom, fiMembres.moyPrec);
+	printf("ficher : matricule -> %u  nom -> %s prenom -> %s moyenne -> %u  \n \n", fiMembres.matricule, fiMembres.nom, fiMembres.prenom, fiMembres.moyPrec);
 	
 	while ((!feof(pDebFiMembres)) && (codeErreur == PAS_D_ERREUR))
 	{
@@ -132,7 +132,7 @@ CodeErreur chargementMembres(Membres (*membres[]),int nbMembre)
 		nbMembre++;
 	}
 	printf("code erreur de la sortie de boucle chrgerMembre %d", codeErreur);
-	printf(" matricule -> %d  nom -> %d prenom -> %d moyenne -> %d  \n \n", membres[10]->matricule, membres[10]->nom, membres[10]->prenom, membres[10]->moyPrec);
+	printf(" matricule -> %d  nom -> %s prenom -> %s moyenne -> %d  \n \n", membres[10]->matricule, membres[10]->nom, membres[10]->prenom, membres[10]->moyPrec);
 
 	fclose(pDebFiMembres);
 	return codeErreur;
