@@ -54,13 +54,6 @@
 		Inscriptions *pSuiv;
 	};
 
-	typedef struct lexique Lexique;
-	struct lexique
-	{
-		int code;
-		char message[NB_CHAR_MESSAGE_MAX];
-		Lexique *pSuiv;
-	};
 
 	typedef struct fiLexique FiLexique;
 	struct fiLexique

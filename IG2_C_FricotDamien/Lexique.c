@@ -8,9 +8,9 @@
 
 
 
-CodeErreur nouveauLexique(Lexique ** pLexiqueNouv)
+CodeErreur nouveauLexique(Message ** pLexiqueNouv)
 {
-	(*pLexiqueNouv) = (Lexique*)malloc(sizeof(Lexique));
+	(*pLexiqueNouv) = (Message*)malloc(sizeof(Message));
 	if ((*pLexiqueNouv) != NULL)
 	{
 		return PAS_D_ERREUR;
@@ -20,11 +20,11 @@ CodeErreur nouveauLexique(Lexique ** pLexiqueNouv)
 	}
 }
 
-void ajouterLexique(Lexique ** pLexique, Lexique  *pLexiqueNouv, Lexique * pLexiqueSauv, FiLexique fiLexique)
+void ajouterLexique(Message ** pLexique, Message  *pLexiqueNouv, Message * pLexiqueSauv, FiLexique fiLexique)
 {
 
-	pLexiqueNouv->code = fiLexique.code;
-	strcpy_s(pLexiqueNouv->message, NB_CHAR_MESSAGE_MAX, fiLexique.message);
+	pLexiqueNouv->num = fiLexique.code;
+	strcpy_s(pLexiqueNouv->texte, NB_CHAR_MESSAGE_MAX, fiLexique.message);
 	pLexiqueNouv->pSuiv = NULL;
 
 	if (pLexiqueSauv != NULL) {
@@ -38,22 +38,12 @@ void ajouterLexique(Lexique ** pLexique, Lexique  *pLexiqueNouv, Lexique * pLexi
 	}
 
 	pLexiqueSauv = pLexiqueNouv;
-	printf("LC Lexique  code = %u \n message = %s", pLexiqueSauv->code, pLexiqueSauv->message);
+	printf("LC Lexique  code = %u \n message = %s", pLexiqueSauv->num, pLexiqueSauv->texte);
 }
 
-CodeErreur nouveauShift(Shifts ** pShiftsNouv)
-{
-	(*pShiftsNouv) = (Shifts*)malloc(sizeof(Shifts));
-	if ((*pShiftsNouv) != NULL)
-	{
-		return PAS_D_ERREUR;
-	}
-	else {
-		return ALLOCATION_MEMOIRE;
-	}
-}
 
-CodeErreur chargerLexique(Langue choixLangue,Lexique **pLexique)
+
+CodeErreur chargerLexique(Langue choixLangue,Message **pLexique)
 {
 	CodeErreur codeErreur = PAS_D_ERREUR;
 	printf("\n charger lexique");
@@ -72,14 +62,13 @@ CodeErreur chargerLexique(Langue choixLangue,Lexique **pLexique)
 	
 	(*pLexique) = NULL;
 
-	Lexique *pLexiqueSauv = NULL;
-	Lexique *pLexiqueNouv = NULL;
+	Message *pLexiqueSauv = NULL;
+	Message *pLexiqueNouv = NULL;
 	FiLexique fiLexique;
 
 
-	// Problème lors de la lecture du fichier
-	//fread_s(&fiLexique, sizeof(FiLexique), sizeof(FiLexique), 1, pDebLexique);
-	fscanf_s(pDebLexique, "%u %s", &(fiLexique.code), &(fiLexique.message));
+	fgets(&fiLexique.code, 5, pDebLexique);
+	fgets(&fiLexique.message, 1000, pDebLexique);
 	printf("1 Fichier Lexique : code = %u \n message = %s", fiLexique.code, fiLexique.message);
 
 
@@ -94,17 +83,14 @@ CodeErreur chargerLexique(Langue choixLangue,Lexique **pLexique)
 			ajouterLexique(pLexique, pLexiqueNouv, pLexiqueSauv, fiLexique);
 			printf("ajouter lexique");
 
-			// shift Lu
-			//fread_s(&fiLexique, sizeof(FiLexique), sizeof(FiLexique), 1, pDebLexique);
-			fscanf_s(pDebLexique, "%u %s", &fiLexique.code, &fiLexique.message);
-
-			printf("2 Fichier Lexique : code = %u \n message = %s", fiLexique.code, fiLexique.message);
+			// Lexique Lu
+			fgets(&fiLexique.code, 5, pDebLexique);
+			fgets(&fiLexique.message, 1000, pDebLexique);
 
 		}
 	}
 
-	//free(pLexiqueNouv);
-	//free(pLexiqueSauv);
+	
 	fclose(pDebLexique);
 	return codeErreur;
 

@@ -10,7 +10,7 @@ void main(void)
 	printf("Depart \n");
 	CodeErreur codeErreur = PAS_D_ERREUR;
 	Shifts *pDebShifts = NULL;
-	Lexique *pLexique = NULL;
+	Message *pLexique = NULL;
 	Membres(*membres[]) = { NULL };
 	int nbMembres = 0;
 	char langue;

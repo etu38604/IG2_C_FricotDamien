@@ -34,7 +34,7 @@
 	struct message {
 		int num;
 		char texte[TTXT];
-		Message * pSuiv;
+		Message *pSuiv;
 	};
 
 	CodeErreur chargerLexique(Langue choixLangue, Message ** pPLexique);
