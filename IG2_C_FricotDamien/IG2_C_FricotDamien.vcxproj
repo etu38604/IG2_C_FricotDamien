@@ -154,6 +154,7 @@
     <ClCompile Include="Fichier.c" />
     <ClCompile Include="Gestion.c" />
     <ClCompile Include="Interface.c" />
+    <ClCompile Include="Lexique.c" />
     <ClCompile Include="Main.c" />
   </ItemGroup>
   <ItemGroup>
@@ -166,9 +167,6 @@
   <ItemGroup>
     <Text Include="English.txt" />
     <Text Include="Francais.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="Lexique.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

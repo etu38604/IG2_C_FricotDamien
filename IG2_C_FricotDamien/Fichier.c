@@ -7,6 +7,7 @@
 
 
 
+
 CodeErreur initialiserShifts(Shifts ** pDebShifts)
 {
 	CodeErreur codeErreur = PAS_D_ERREUR;
@@ -20,8 +21,6 @@ CodeErreur initialiserShifts(Shifts ** pDebShifts)
 		{
 			printf("premiere fois");
 			codeErreur = chargerDatesOrgShifts(&pDebShifts);
-
-			// charger date Orgs Shifts
 		}
 		else
 		{
@@ -93,6 +92,8 @@ CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts)
 		}
 	}
 	
+	free(pShiftsNouv);
+	free(pShiftsSauv);
 	fclose(pDebOrgShifts);
 	return codeErreur;
 }
@@ -114,7 +115,7 @@ CodeErreur chargementMembres(Membres (*membres[]),int nbMembre)
 	while ((!feof(pDebFiMembres)) && (codeErreur == PAS_D_ERREUR))
 	{
 		codeErreur = nouveauMembre(&pMembre);
-		printf("nouveau membre code erreur = %d", codeErreur);
+		
 
 		if (codeErreur == PAS_D_ERREUR)
 		{
@@ -132,8 +133,9 @@ CodeErreur chargementMembres(Membres (*membres[]),int nbMembre)
 		nbMembre++;
 	}
 	printf("code erreur de la sortie de boucle chrgerMembre %d", codeErreur);
-	printf(" matricule -> %d  nom -> %s prenom -> %s moyenne -> %d  \n \n", membres[10]->matricule, membres[10]->nom, membres[10]->prenom, membres[10]->moyPrec);
+	printf(" matricule -> %d  nom -> %s prenom -> %s moyenne -> %d  \n \n", membres[0]->matricule, membres[0]->nom, membres[0]->prenom, membres[0]->moyPrec);
 
+	free(pMembre);
 	fclose(pDebFiMembres);
 	return codeErreur;
 }

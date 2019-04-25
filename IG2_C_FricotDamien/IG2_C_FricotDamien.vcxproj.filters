@@ -27,6 +27,9 @@
     <ClCompile Include="Gestion.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Lexique.c">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constantes.h">
@@ -52,10 +55,5 @@
     <Text Include="Francais.txt">
       <Filter>Fichiers de ressources</Filter>
     </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="Lexique.obj">
-      <Filter>Fichiers de ressources</Filter>
-    </Object>
   </ItemGroup>
 </Project>

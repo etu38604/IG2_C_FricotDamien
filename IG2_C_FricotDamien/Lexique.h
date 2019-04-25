@@ -6,6 +6,9 @@
 	#include <errno.h>
 	#include "Constantes.h"
 
+	#define FRANCAIS "Francais.txt"
+	#define ENGLISH "English.txt"
+
 	typedef enum langue Langue;
 	enum langue { fr = 1, en } lng;
 
@@ -26,7 +29,7 @@
 		SAUVEGARDE = 3401,
 		PREMIER_ERREUR = 5000,
 	};
-
+	
 	typedef struct message Message;
 	struct message {
 		int num;
@@ -38,5 +41,6 @@
 	Message * messageTrouvé(Message * pLexique, int numMessage);
 	int nbChoixMenu(Message * pMenu, int debMenu);
 	void libérerLexique(Message * pLexique);
+	
 #endif
 

@@ -3,20 +3,21 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "Constantes.h"
+#include "Lexique.h"
 
 
-int langueLue()
+char langueLue() // A optimiser et gestion cas d'erreur
 {
-	int langue = 0;
+	char langue;
 	bool selection = false;
 
 	while (!selection)
 	{
-		printf_s(" 1 : French \n");
-		printf_s(" 2 : English \n");
-		scanf_s("%u", langue);
+		printf_s(" f : French \n");
+		printf_s(" e : English \n");
+		scanf_s("%c",&langue, 1);
 
-		if ((langue == 1) || (langue == 2))
+		if ((langue == 'e') || (langue == 'f'))
 		{
 			selection = true;
 		}
@@ -28,6 +29,16 @@ int langueLue()
 	}
 
 	return langue;
+}
+
+
+
+void dialogues(NumMessage *numMessage)
+{
+	CodeErreur codeErreur = PAS_D_ERREUR;
+	numMessage = MENU_PRINCIPAL;
+
+	// Choix obtenu
 }
 /*
 

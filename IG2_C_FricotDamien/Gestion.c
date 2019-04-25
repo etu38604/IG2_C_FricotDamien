@@ -6,19 +6,6 @@
 
 
 
-
-CodeErreur nouveauShift(Shifts ** pShiftsNouv)
-{
-	(*pShiftsNouv) = (Shifts*)malloc(sizeof(Shifts));
-	if ((*pShiftsNouv) != NULL)
-	{
-		return PAS_D_ERREUR;
-	}
-	else {
-		return ALLOCATION_MEMOIRE;
-	}
-}
-
 void ajouterShift(Shifts ** pDebShifts, Shifts  *pShiftsNouv, Shifts * pShiftsSauv,FiOrgShift fiOrgShift)
 {
 	

@@ -4,4 +4,4 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-int langueLue();
+char langueLue();

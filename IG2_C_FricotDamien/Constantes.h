@@ -9,6 +9,7 @@
 	#define PAUSE getchar()
 	#define CLEAR system("cls")
 	#define NB_MATRICULE_MAX 999999
+	#define NB_CHAR_MESSAGE_MAX 250
 	#define NB_CHAR_NOM_MAX 80
 	#define NB_CHAR_PRENOM_MAX 30
 
@@ -51,6 +52,21 @@
 		int matricule2;
 		int categorie;
 		Inscriptions *pSuiv;
+	};
+
+	typedef struct lexique Lexique;
+	struct lexique
+	{
+		int code;
+		char message[NB_CHAR_MESSAGE_MAX];
+		Lexique *pSuiv;
+	};
+
+	typedef struct fiLexique FiLexique;
+	struct fiLexique
+	{
+		int code;
+		char message[NB_CHAR_MESSAGE_MAX];
 	};
 
 	typedef struct shifts Shifts;
