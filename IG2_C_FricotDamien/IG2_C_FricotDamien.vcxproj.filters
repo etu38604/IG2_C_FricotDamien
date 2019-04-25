@@ -27,9 +27,6 @@
     <ClCompile Include="Gestion.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Lexique.c">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constantes.h">
@@ -47,6 +44,9 @@
     <ClInclude Include="Interface.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="English.txt">
@@ -55,5 +55,15 @@
     <Text Include="Francais.txt">
       <Filter>Fichiers de ressources</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="IG2_C_FricotDamien.rc">
+      <Filter>Fichiers de ressources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Lexique.obj">
+      <Filter>Fichiers de ressources</Filter>
+    </Object>
   </ItemGroup>
 </Project>

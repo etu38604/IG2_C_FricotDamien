@@ -4,4 +4,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-char langueLue();
+int langueLue();
+void afficherMessage(Message *pLexique, int numMessage);
+

@@ -154,7 +154,6 @@
     <ClCompile Include="Fichier.c" />
     <ClCompile Include="Gestion.c" />
     <ClCompile Include="Interface.c" />
-    <ClCompile Include="Lexique.c" />
     <ClCompile Include="Main.c" />
   </ItemGroup>
   <ItemGroup>
@@ -163,10 +162,17 @@
     <ClInclude Include="Gestion.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="Lexique.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="English.txt" />
     <Text Include="Francais.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="IG2_C_FricotDamien.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Lexique.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

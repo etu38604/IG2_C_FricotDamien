@@ -13,40 +13,64 @@ void main(void)
 	Message *pLexique = NULL;
 	Membres(*membres[]) = { NULL };
 	int nbMembres = 0;
-	char langue;
-	//langue = langueLue(); 
+	int langue;
+	langue = langueLue(); 
 
 	codeErreur = chargerLexique(1,&pLexique);
 	
-	//codeErreur = initialiserShifts(&pDebShifts);
-
 	if (codeErreur != PAS_D_ERREUR)
 	{
-		// Afficher Message
+		if (codeErreur == ALLOCATION_MEMOIRE)
+		{
+			printf("Erreur Memoire / Memory Error");
+
+			free(pLexique);
+		}
+		if (codeErreur == PROBS_OUVERTURE)
+		{
+			printf("Erreur ouverture fichier / File Opening Error");
+		}
 	}
 	else
 	{
-		//codeErreur = chargementMembres(&membres, &nbMembres);
+		codeErreur = initialiserShifts(&pDebShifts);
 
 		if (codeErreur != PAS_D_ERREUR)
 		{
-			// Afficher message
+			int numMessage = PREMIER_ERREUR + codeErreur;
+			afficherMessage(pLexique, numMessage);
 		}
 		else
 		{
-			// Dialogue
+			codeErreur = chargementMembres(&membres, &nbMembres);
+
+			if (codeErreur != PAS_D_ERREUR)
+			{
+				int numMessage = PREMIER_ERREUR + codeErreur;
+				afficherMessage(pLexique, numMessage);
+			}
+			else
+			{
+				// Dialogue
+			}
 		}
+
+
+		if (pLexique != NULL)
+		{
+			free(pLexique);
+		}
+
+		if (pDebShifts != NULL)
+		{
+			free(pDebShifts);
+		}
+		printf("\n code de l'erreur = %d \n", codeErreur);
+		printf("\ n Fin INIT \n");
+		free(membres);
 	}
 
-	// Liberer Lexique
-
-	// Liberer Shift
-
 	
-	printf("\n code de l'erreur = %d \n", codeErreur);
-	printf("\ n Fin INIT \n");
-	free(pDebShifts);
-	free(membres);
 	
 
 }

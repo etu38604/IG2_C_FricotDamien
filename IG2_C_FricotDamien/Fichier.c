@@ -93,7 +93,6 @@ CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts)
 	}
 	
 	free(pShiftsNouv);
-	free(pShiftsSauv);
 	fclose(pDebOrgShifts);
 	return codeErreur;
 }
