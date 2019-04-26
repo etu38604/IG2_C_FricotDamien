@@ -71,8 +71,6 @@ CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts)
 	Shifts *pShiftsNouv = NULL;
 	FiOrgShift fiOrgShift;
 
-
-	// Problème lors de la lecture du fichier
 	fread_s(&fiOrgShift, sizeof(FiOrgShift), sizeof(FiOrgShift), 1, pDebOrgShifts); 
 	
 	
@@ -97,7 +95,7 @@ CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts)
 	return codeErreur;
 }
 
-CodeErreur chargementMembres(Membres (*membres[]),int nbMembre)
+CodeErreur chargementMembres(Membres membres[NB_MATRICULE_MAX],int nbMembre)
 {
 	printf("\n charger membres \n");
 	
@@ -105,36 +103,31 @@ CodeErreur chargementMembres(Membres (*membres[]),int nbMembre)
 	fopen_s(&pDebFiMembres, MEMBRE, "rb");
 	CodeErreur codeErreur = PAS_D_ERREUR;
 	nbMembre = 0;
-	Membres *pMembre = NULL;
 	Membres fiMembres;
 
 	fread_s(&fiMembres, sizeof(Membres), sizeof(Membres), 1, pDebFiMembres);
-	printf("ficher : matricule -> %u  nom -> %s prenom -> %s moyenne -> %u  \n \n", fiMembres.matricule, fiMembres.nom, fiMembres.prenom, fiMembres.moyPrec);
+	printf("ficher : matricule -> %d  nom -> %s prenom -> %s moyenne -> %d  \n \n", fiMembres.matricule, fiMembres.nom, fiMembres.prenom, fiMembres.moyPrec);
 	
-	while ((!feof(pDebFiMembres)) && (codeErreur == PAS_D_ERREUR))
+	while ((!feof(pDebFiMembres)) && (codeErreur == PAS_D_ERREUR) && (nbMembre < NB_MATRICULE_MAX))
 	{
-		codeErreur = nouveauMembre(&pMembre);
 		
-
-		if (codeErreur == PAS_D_ERREUR)
-		{
-			pMembre->matricule = fiMembres.matricule;
-			strcpy_s(pMembre->nom, NB_CHAR_NOM_MAX, fiMembres.nom);
-			strcpy_s(pMembre->prenom, NB_CHAR_PRENOM_MAX, fiMembres.prenom);
-			pMembre->moyPrec = fiMembres.moyPrec;
-			membres[nbMembre] = pMembre;
+			// A optimiser ou  changer pour tableau dynamique
+			membres[nbMembre] = fiMembres;
+			//membres[nbMembre]->matricule = fiMembres.matricule;
+			//strcpy_s(membres[nbMembre]->nom, NB_CHAR_NOM_MAX, fiMembres.nom);
+			//strcpy_s(membres[nbMembre]->prenom, NB_CHAR_PRENOM_MAX, fiMembres.prenom);
+			//membres[nbMembre]->moyPrec = fiMembres.moyPrec;
 			
 			// shift Lu
 			fread_s(&fiMembres, sizeof(Membres), sizeof(Membres), 1, pDebFiMembres);
 			//printf("ficher : matricule -> %d  nom -> %d prenom -> %d moyenne -> %d  \n \n", fiMembres.matricule, fiMembres.nom, fiMembres.prenom, fiMembres.moyPrec);
 			
-		}
+		
 		nbMembre++;
 	}
 	printf("code erreur de la sortie de boucle chrgerMembre %d", codeErreur);
-	printf(" matricule -> %d  nom -> %s prenom -> %s moyenne -> %d  \n \n", membres[0]->matricule, membres[0]->nom, membres[0]->prenom, membres[0]->moyPrec);
+	printf(" matricule -> %d  nom -> %s prenom -> %s moyenne -> %d  \n \n", membres[10].matricule, membres[10].nom, membres[10].prenom, membres[10].moyPrec);
 
-	free(pMembre);
 	fclose(pDebFiMembres);
 	return codeErreur;
 }

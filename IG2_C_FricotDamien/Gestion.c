@@ -38,7 +38,7 @@ void ajouterShift(Shifts ** pDebShifts, Shifts  *pShiftsNouv, Shifts * pShiftsSa
 	  pShiftsSauv = pShiftsNouv;
 }
 
-
+/* En test
 CodeErreur nouveauMembre(Membres **pMembre)
 {
 	(*pMembre) = (Membres*)malloc(sizeof(Membres));
@@ -51,3 +51,4 @@ CodeErreur nouveauMembre(Membres **pMembre)
 	}
 	
 }
+*/

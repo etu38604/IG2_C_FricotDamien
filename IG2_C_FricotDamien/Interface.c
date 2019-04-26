@@ -79,7 +79,7 @@ int afficherMenu(Message *pLexique, int numMenu)
 
 	while (pMessage != NULL && pMessage->num <= numMenu + tailleMenu)
 	{
-		printf("%u . %s", nbChoix, pMessage->texte);
+		printf("%d . %s", nbChoix, pMessage->texte);
 		nbChoix++;
 		pMessage = pMessage->pSuiv;
 	}
@@ -87,7 +87,7 @@ int afficherMenu(Message *pLexique, int numMenu)
 	int maxChoix = nbChoix - 1;
 }
 
-ChoixMenu ChoixObtenu(Message *pLexique, int numMessage)
+ChoixMenu choixObtenu(Message *pLexique, int numMessage)
 {
 	bool choixValide = false;
 	NumMessage numMenu;
@@ -97,8 +97,8 @@ ChoixMenu ChoixObtenu(Message *pLexique, int numMessage)
 	int maxChoix = afficherMenu(pLexique, numMenu);
 	numMessage = OBT_CHOIX;
 	afficherMessage(pLexique, numMessage);
-	int choix;
-	scanf_s('%u', choix);
+	int choix = 0 ;
+	scanf_s('%d', choix);
 	choixValide = choix >= 1 && choix <= maxChoix;
 	if (! choixValide)
 		{
@@ -114,11 +114,14 @@ void dialogues(Message *pLexique,Shifts pDebShifts,Membres membres, int nbMembre
 {
 	CodeErreur codeErreur = PAS_D_ERREUR;
 	NumMessage numMessage = MENU_PRINCIPAL;
-	ChoixMenu choix = choixMenu(pLexique, numMessage);
+	ChoixMenu choix = choixObtenu(pLexique, numMessage);
 
 	while (choix != QUITTER)
 	{
-
+		if (choix == AJOUTER_INSCRIPTION)
+		{
+			// Ajouter inscription
+		}
 	}
 	
 }

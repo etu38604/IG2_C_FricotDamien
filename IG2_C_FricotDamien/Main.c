@@ -11,12 +11,12 @@ void main(void)
 	CodeErreur codeErreur = PAS_D_ERREUR;
 	Shifts *pDebShifts = NULL;
 	Message *pLexique = NULL;
-	Membres(*membres[]) = { NULL };
+	Membres membres[NB_MATRICULE_MAX] = {NULL};
 	int nbMembres = 0;
-	int langue;
-	langue = langueLue(); 
+	
+	int langue = langueLue(); 
 
-	codeErreur = chargerLexique(1,&pLexique);
+	codeErreur = chargerLexique(langue,&pLexique);
 	
 	if (codeErreur != PAS_D_ERREUR)
 	{
@@ -67,7 +67,7 @@ void main(void)
 		}
 		printf("\n code de l'erreur = %d \n", codeErreur);
 		printf("\ n Fin INIT \n");
-		free(membres);
+		
 	}
 
 	
