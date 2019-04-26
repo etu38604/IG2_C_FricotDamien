@@ -134,27 +134,77 @@ void dialogues(Message *pLexique,Shifts pDebShifts,Membres membres, int nbMembre
 	
 }
 
-CodeErreur ajouterInscription(Shifts ** pDebShifts)
+Shifts shiftObtenu(Message *pLexique,Shifts *pDebShift)
 {
 	CodeErreur codeErreur = PAS_D_ERREUR;
+	int date = 0;
+	int heure = 0;
+	bool shiftExiste = false;
+	Shifts *pShift = NULL;
+
+	do
+	{
+		afficherMessage(pLexique, OBT_DATE);
+		scanf_s("%d", date);
+
+		afficherMessage(pLexique, OBT_HEURE);
+		scanf_s("%d", heure);
+
+		shiftExiste = shiftTrouve(pDebShift, &pShift, date, heure);
+		if (!shiftExiste)
+		{
+			codeErreur = SHIFT_INCONNU;
+			afficherMessage(pLexique, PREMIER_ERREUR + codeErreur);
+		}
+	} while (!shiftExiste);
+	return *pShift;
+}
+
+Membres membreObtenu(Message **pLexique,Shifts **pDebShifts,Membres membres[NB_MATRICULE_MAX],int nbMembres)
+{
+	CodeErreur codeErreur = PAS_D_ERREUR;
+	Membres membre;
+	int matricule = 0;
+	bool membreExiste = false;
+	do
+	{
+		// lister Membres
+		afficherMessage(pLexique, OBT_MATRICULE);
+		scanf_s("%d", matricule);
+
+		membreExiste = MembreTrouve(pDebShift, &pShift, date, heure); // A déclarer
+		if (!membreExiste)
+		{
+			codeErreur = MEMBRE_INCONNU;
+			afficherMessage(pLexique, PREMIER_ERREUR + codeErreur);
+		}
+	} while (!membreExiste);
+	return membre;
+}
+
+CodeErreur ajouterInscription(Message ** pLexique,Shifts ** pDebShifts,Membres membres[NB_MATRICULE_MAX],int nbMembres)
+{
+	CodeErreur codeErreur = PAS_D_ERREUR;
+	Doublette *pNouvDoublette = NULL;
+	bool dejaInscrit = false;
 	codeErreur = afficherShiftsIncomplets(pDebShifts);
 	
 	if (codeErreur != SHIFTS_COMPLETS)
 	{
-		// Nouvelle doublette
+		codeErreur = nouvelleDoublette(&pNouvDoublette);
 
 		if (codeErreur != ALLOCATION_MEMOIRE)
 		{
-			// Shift Obtenu
+			Shifts pShift = shiftObtenu(pLexique, pDebShifts);
 			// Membre obtenu (Matricule 1 , moy 1)
 			// Membre déjà inscrit
 
-			if (not (MEMBRE_DEJA_INSCRIT))
+			if (!dejaInscrit)
 			{
 				// Membre Obtenu (matricule 2, moy 2)
 				// Membre déjà inscrit
 
-				if (not (MEMBRE_DEJA_INSCRIT))
+				if (!dejaInscrit)
 				{
 					// categorie (calcul de la categorie)
 					// ajouter doublette shift

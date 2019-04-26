@@ -60,6 +60,48 @@ CodeErreur afficherShiftsIncomplets(Shifts **pDebShift)
 }
 
 
+CodeErreur nouvelleDoublette(Shifts ** pNouvDoublette)
+{
+	(*pNouvDoublette) = (Doublette*)malloc(sizeof(Doublette));
+	if ((*pNouvDoublette) != NULL)
+	{
+		return PAS_D_ERREUR;
+	}
+	else {
+		return ALLOCATION_MEMOIRE;
+	}
+}
+
+_Bool shiftTrouve(Shifts **pDebShift, Shifts *pShift, int date, int heure)
+{
+	pShift = pDebShift;
+	while (pShift != NULL && pShift->heure != heure && pShift->date != date)
+	{
+		pShift = pShift->pSuiv;
+	}
+
+	if (pShift != NULL)
+	{
+		return true;
+	}
+	else return false;
+}
+
+_Bool membreTrouve(Membres membres[NB_MATRICULE_MAX],int nbMembres, int matricule)
+{
+	
+	while (pShift != NULL && pShift->heure != heure && pShift->date != date)
+	{
+		pShift = pShift->pSuiv;
+	}
+
+	if (pShift != NULL)
+	{
+		return true;
+	}
+	else return false;
+}
+
 /* En test
 CodeErreur nouveauMembre(Membres **pMembre)
 {

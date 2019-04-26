@@ -9,5 +9,7 @@
 CodeErreur nouveauShift(Shifts ** pShiftsNouv);
 void ajouterShift(Shifts ** pDebShifts, Shifts  *pShiftsNouv, Shifts * pShiftsSauv, FiOrgShift fiOrgShift);
 CodeErreur afficherShiftsIncomplets(Shifts **pDebShift);
+CodeErreur nouvelleDoublette(Shifts ** pNouvDoublette);
+_Bool shiftTrouve(Shifts **pDebShift, Shifts *pShift, int date, int heure);
 
 #endif

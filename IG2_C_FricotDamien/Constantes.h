@@ -101,5 +101,16 @@
 		int moyPrec;
 	};
 
+	typedef struct doublette Doublette; 
+	struct doublette
+	{
+		int matricule1; // A discutter Membres joueur ?
+		int matricule2;
+		int moy1;
+		int moy2;
+		int categ;
+	};
+	
+
 #endif
 
