@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include "Constantes.h"
 #include "Lexique.h"
+#include "Gestion.h"
 
 
 int langueLue() // A optimiser et gestion cas d'erreur
@@ -63,7 +64,7 @@ int afficherMenu(Message *pLexique, int numMenu)
 	int numMessage = numMenu;
 	Message *pMessage = NULL;
 
-	while (pMessage != NULL && pMessage->num != numMessage)
+	while (pMessage != NULL && pMessage->num != numMessage) // Message trouvé
 	{
 		pMessage = pMessage->pSuiv;
 	}
@@ -73,7 +74,7 @@ int afficherMenu(Message *pLexique, int numMenu)
 		printf("%s", pMessage->texte); // Revoir gestion cas d'erreur
 	}
 
-	int tailleMenu = nbChoixMenu(pMessage,numMenu); // A definir
+	int tailleMenu = nbChoixMenu(pMessage,&numMenu);
 	pMessage = pMessage->pSuiv;
 	int nbChoix = 1;
 
@@ -118,21 +119,26 @@ void dialogues(Message *pLexique,Shifts pDebShifts,Membres membres, int nbMembre
 
 	while (choix != QUITTER)
 	{
-		if (choix == AJOUTER_INSCRIPTION)
+		
+		switch (choix)
 		{
-			// Ajouter inscription
+			case  AJOUTER_INSCRIPTION:
+
+				// Ajouter inscription
+				
+				break;
+
 		}
+			
 	}
 	
 }
-/*
-
 
 CodeErreur ajouterInscription(Shifts ** pDebShifts)
 {
 	CodeErreur codeErreur = PAS_D_ERREUR;
-	// Afficher Shifts incomplets
-
+	codeErreur = afficherShiftsIncomplets(pDebShifts);
+	
 	if (codeErreur != SHIFTS_COMPLETS)
 	{
 		// Nouvelle doublette
@@ -156,16 +162,16 @@ CodeErreur ajouterInscription(Shifts ** pDebShifts)
 				}
 				else
 				{
-					codeErreur = MEMBRE_DEJA_INSCRIT;
+					return codeErreur = MEMBRE_DEJA_INSCRIT;
 				}
 			}
 			else
 			{
-				codeErreur = MEMBRE_DEJA_INSCRIT;
+				return codeErreur = MEMBRE_DEJA_INSCRIT;
 			}
 		}
 	}
+	return codeErreur;
 }
 
 
-*/

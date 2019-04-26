@@ -38,6 +38,28 @@ void ajouterShift(Shifts ** pDebShifts, Shifts  *pShiftsNouv, Shifts * pShiftsSa
 	  pShiftsSauv = pShiftsNouv;
 }
 
+CodeErreur afficherShiftsIncomplets(Shifts **pDebShift)
+{
+	Shifts *pShiftLu = pDebShift;
+	CodeErreur codeErreur = SHIFTS_COMPLETS;
+
+
+	while (pShiftLu != NULL)
+	{
+		if (pShiftLu->nbDoublette < NB_PISTE_MAX)
+		{
+			printf("Shift prevu le %d a %d heure, reste %d place(s) disponible(s) \n", pShiftLu->date, pShiftLu->heure, (NB_PISTE_MAX - pShiftLu->nbDoublette));
+			codeErreur = PAS_D_ERREUR;
+		}
+
+		
+		pShiftLu = pShiftLu->pSuiv;
+	}
+
+	return codeErreur;
+}
+
+
 /* En test
 CodeErreur nouveauMembre(Membres **pMembre)
 {

@@ -8,10 +8,11 @@
 
 	#define PAUSE getchar()
 	#define CLEAR system("cls")
-	#define NB_MATRICULE_MAX 999
+	#define NB_MATRICULE_MAX 999  // Question à poser taille tableau
 	#define NB_CHAR_MESSAGE_MAX 250
 	#define NB_CHAR_NOM_MAX 80
 	#define NB_CHAR_PRENOM_MAX 30
+	#define NB_PISTE_MAX 16
 
 	typedef enum codeErreur CodeErreur;
 	enum codeErreur {

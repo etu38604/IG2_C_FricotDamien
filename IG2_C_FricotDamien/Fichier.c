@@ -95,7 +95,7 @@ CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts)
 	return codeErreur;
 }
 
-CodeErreur chargementMembres(Membres membres[NB_MATRICULE_MAX],int nbMembre)
+CodeErreur chargementMembres(Membres membres[NB_MATRICULE_MAX],int nbMembre) // Question à poser taille tableau
 {
 	printf("\n charger membres \n");
 	
@@ -113,11 +113,14 @@ CodeErreur chargementMembres(Membres membres[NB_MATRICULE_MAX],int nbMembre)
 		
 			// A optimiser ou  changer pour tableau dynamique
 			membres[nbMembre] = fiMembres;
-			//membres[nbMembre]->matricule = fiMembres.matricule;
-			//strcpy_s(membres[nbMembre]->nom, NB_CHAR_NOM_MAX, fiMembres.nom);
-			//strcpy_s(membres[nbMembre]->prenom, NB_CHAR_PRENOM_MAX, fiMembres.prenom);
-			//membres[nbMembre]->moyPrec = fiMembres.moyPrec;
-			
+
+			/*
+			membres[nbMembre]->matricule = fiMembres.matricule;
+			strcpy_s(membres[nbMembre]->nom, NB_CHAR_NOM_MAX, fiMembres.nom);
+			strcpy_s(membres[nbMembre]->prenom, NB_CHAR_PRENOM_MAX, fiMembres.prenom);
+			membres[nbMembre]->moyPrec = fiMembres.moyPrec;
+			*/
+
 			// shift Lu
 			fread_s(&fiMembres, sizeof(Membres), sizeof(Membres), 1, pDebFiMembres);
 			//printf("ficher : matricule -> %d  nom -> %d prenom -> %d moyenne -> %d  \n \n", fiMembres.matricule, fiMembres.nom, fiMembres.prenom, fiMembres.moyPrec);
