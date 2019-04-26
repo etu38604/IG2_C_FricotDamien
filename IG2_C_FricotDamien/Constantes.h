@@ -47,7 +47,7 @@
 	};
 
 	typedef struct inscriptions Inscriptions;
-	struct inscription
+	struct inscriptions
 	{
 		int matricule1;
 		int matricule2;

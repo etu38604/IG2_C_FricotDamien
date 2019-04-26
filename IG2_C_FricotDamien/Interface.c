@@ -165,6 +165,7 @@ Membres membreObtenu(Message **pLexique,Shifts **pDebShifts,Membres membres[NB_M
 	CodeErreur codeErreur = PAS_D_ERREUR;
 	Membres membre;
 	int matricule = 0;
+	int indMembre = 0;
 	bool membreExiste = false;
 	do
 	{
@@ -172,13 +173,15 @@ Membres membreObtenu(Message **pLexique,Shifts **pDebShifts,Membres membres[NB_M
 		afficherMessage(pLexique, OBT_MATRICULE);
 		scanf_s("%d", matricule);
 
-		membreExiste = MembreTrouve(pDebShift, &pShift, date, heure); // A déclarer
+		membreExiste = membreTrouve(&membres[NB_MATRICULE_MAX], nbMembres, matricule, &indMembre);
 		if (!membreExiste)
 		{
 			codeErreur = MEMBRE_INCONNU;
 			afficherMessage(pLexique, PREMIER_ERREUR + codeErreur);
 		}
 	} while (!membreExiste);
+	membre.moyPrec = membres[indMembre].moyPrec;
+	membre.matricule = matricule;
 	return membre;
 }
 
@@ -196,19 +199,26 @@ CodeErreur ajouterInscription(Message ** pLexique,Shifts ** pDebShifts,Membres m
 		if (codeErreur != ALLOCATION_MEMOIRE)
 		{
 			Shifts pShift = shiftObtenu(pLexique, pDebShifts);
-			// Membre obtenu (Matricule 1 , moy 1)
-			// Membre déjà inscrit
+			Membres joueur1 = membreObtenu(pLexique, pDebShifts, &membres[NB_MATRICULE_MAX], nbMembres);
+			
+			bool dejaInscrit = membreDejaInscrit(pDebShifts, joueur1);
 
 			if (!dejaInscrit)
 			{
-				// Membre Obtenu (matricule 2, moy 2)
-				// Membre déjà inscrit
+				Membres joueur2 = membreObtenu(pLexique, pDebShifts, &membres[NB_MATRICULE_MAX], nbMembres);
+				dejaInscrit = membreDejaInscrit(pDebShifts, joueur2);
 
 				if (!dejaInscrit)
 				{
-					// categorie (calcul de la categorie)
-					// ajouter doublette shift
+					// Ajouter doublette shift
+					pNouvDoublette->categ = categorie(joueur1, joueur2);
+					pNouvDoublette->matricule1 = joueur1.matricule;
+					pNouvDoublette->matricule2 = joueur2.matricule;
+					pNouvDoublette->moy1 = joueur1.moyPrec;
+					pNouvDoublette->moy2 = joueur2.moyPrec;
+					
 					// maj nbDoublette
+					pShift.nbDoublette++;
 				}
 				else
 				{

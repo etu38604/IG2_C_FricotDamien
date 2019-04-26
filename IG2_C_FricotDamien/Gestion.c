@@ -87,20 +87,80 @@ _Bool shiftTrouve(Shifts **pDebShift, Shifts *pShift, int date, int heure)
 	else return false;
 }
 
-_Bool membreTrouve(Membres membres[NB_MATRICULE_MAX],int nbMembres, int matricule)
+_Bool membreTrouve(Membres membres[NB_MATRICULE_MAX],int nbMembres, int matricule, int indMembre)
 {
-	
-	while (pShift != NULL && pShift->heure != heure && pShift->date != date)
+	while ( indMembre < NB_MATRICULE_MAX && membres[indMembre].matricule != matricule)
 	{
-		pShift = pShift->pSuiv;
+		indMembre++;
 	}
 
-	if (pShift != NULL)
+	if (indMembre > NB_MATRICULE_MAX)
+	{
+		return false;
+	}
+	else return true;
+}
+
+_Bool membreDejaInscrit(Shifts ** pDebShifts, Membres membre)
+{
+	Shifts *pShiftLu = NULL;
+	pShiftLu = pDebShifts;
+
+	while (pShiftLu != NULL && pShiftLu->pInscriptions->matricule1 != membre.matricule)
+	{
+		pShiftLu = pShiftLu->pSuiv;
+	}
+
+	if (pShiftLu == NULL)
 	{
 		return true;
 	}
-	else return false;
+	else 
+	{
+		return false;
+	}
 }
+
+int categorie(Membres joueur1, Membres joueur2)
+{
+	int moy = (joueur1.moyPrec + joueur2.moyPrec) / 2;
+	int categ = 0;
+	
+
+	if (moy < 159)
+	{
+		categ = 6;  // A remettre en constante et optimiser
+	}
+	
+	if (160 < moy < 169)
+	{
+		categ = 5;
+	}
+
+	if (170 < moy < 179)
+	{
+		categ = 4;
+	}
+
+	if (180 < moy < 189)
+	{
+		categ = 3;
+	}
+
+	if (190 < moy < 199)
+	{
+		categ = 2;
+	}
+
+	if (moy > 200)
+	{
+		categ = 1;
+	}
+	
+	return categ;
+}
+
+
 
 /* En test
 CodeErreur nouveauMembre(Membres **pMembre)
