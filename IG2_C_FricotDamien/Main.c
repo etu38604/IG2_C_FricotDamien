@@ -9,9 +9,9 @@ void main(void)
 {
 	printf("Depart \n");
 	CodeErreur codeErreur = PAS_D_ERREUR;
-	Shifts *pDebShifts = NULL;
-	Message *pLexique = NULL;
-	Membres membres[NB_MATRICULE_MAX] = {NULL};
+	Shifts *pDebShifts;
+	Message *pLexique;
+	Membres membres[NB_MATRICULE_MAX];
 	int nbMembres = 0;
 	
 	int langue = langueLue(); 
@@ -52,6 +52,7 @@ void main(void)
 			else
 			{
 				// Dialogue
+				dialogues(pLexique, pDebShifts, &membres, nbMembres);
 			}
 		}
 

@@ -63,7 +63,7 @@ int afficherMenu(Message *pLexique, int numMenu)
 {
 	int numMessage = numMenu;
 	Message *pMessage = NULL;
-
+	pMessage = pLexique;
 	while (pMessage != NULL && pMessage->num != numMessage) // Message trouvé
 	{
 		pMessage = pMessage->pSuiv;
@@ -85,7 +85,7 @@ int afficherMenu(Message *pLexique, int numMenu)
 		pMessage = pMessage->pSuiv;
 	}
 
-	int maxChoix = nbChoix - 1;
+	return (nbChoix - 1);
 }
 
 ChoixMenu choixObtenu(Message *pLexique, int numMessage)
@@ -109,30 +109,10 @@ ChoixMenu choixObtenu(Message *pLexique, int numMessage)
 		}
 
 	} while (!choixValide);
+	return numMessage;
 }
 
-void dialogues(Message *pLexique,Shifts pDebShifts,Membres membres, int nbMembres)
-{
-	CodeErreur codeErreur = PAS_D_ERREUR;
-	NumMessage numMessage = MENU_PRINCIPAL;
-	ChoixMenu choix = choixObtenu(pLexique, numMessage);
 
-	while (choix != QUITTER)
-	{
-		
-		switch (choix)
-		{
-			case  AJOUTER_INSCRIPTION:
-
-				// Ajouter inscription
-				
-				break;
-
-		}
-			
-	}
-	
-}
 
 Shifts shiftObtenu(Message *pLexique,Shifts *pDebShift)
 {
@@ -232,6 +212,30 @@ CodeErreur ajouterInscription(Message ** pLexique,Shifts ** pDebShifts,Membres m
 		}
 	}
 	return codeErreur;
+}
+
+void dialogues(Message **pLexique, Shifts **pDebShifts, Membres membres[NB_MATRICULE_MAX], int nbMembres)
+{
+	CodeErreur codeErreur = PAS_D_ERREUR;
+	NumMessage numMessage = MENU_PRINCIPAL;
+	ChoixMenu choix = choixObtenu(pLexique, numMessage);
+
+	while (choix != QUITTER)
+	{
+
+		switch (choix)
+		{
+		case  AJOUTER_INSCRIPTION:
+
+			// Ajouter inscription
+			codeErreur = ajouterInscription(pLexique, pDebShifts, &membres, &nbMembres);
+
+			break;
+
+		}
+
+	}
+
 }
 
 
