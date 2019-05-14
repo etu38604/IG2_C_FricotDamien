@@ -15,26 +15,24 @@ void main(void)
 	int nbMembres = 0;
 	
 	int langue = langueLue(); 
-
 	codeErreur = chargerLexique(langue,&pLexique);
-	
+
 	if (codeErreur != PAS_D_ERREUR)
 	{
 		if (codeErreur == ALLOCATION_MEMOIRE)
 		{
-			printf("Erreur Memoire / Memory Error");
+			printf_s("Erreur Memoire / Memory Error");
 
 			free(pLexique);
 		}
 		if (codeErreur == PROBS_OUVERTURE)
 		{
-			printf("Erreur ouverture fichier / File Opening Error");
+			printf_s("Erreur ouverture fichier / File Opening Error");
 		}
 	}
 	else
 	{
 		codeErreur = initialiserShifts(&pDebShifts);
-
 		if (codeErreur != PAS_D_ERREUR)
 		{
 			int numMessage = PREMIER_ERREUR + codeErreur;

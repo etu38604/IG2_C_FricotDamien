@@ -11,21 +11,18 @@
 CodeErreur initialiserShifts(Shifts ** pDebShifts)
 {
 	CodeErreur codeErreur = PAS_D_ERREUR;
-	printf("\n initialiser shifts");
 	bool premierefois = true;
 	codeErreur = detecterFichierShifts(&premierefois);
-	printf("\n code erreur = %d \n", codeErreur);
 	if (codeErreur == PAS_D_ERREUR)
 	{
 		if (premierefois)
 		{
-			printf("premiere fois");
 			codeErreur = chargerDatesOrgShifts(&pDebShifts);
 		}
 		else
 		{
-			printf("not premiere fois");
 			// charger inscription
+			
 		}
 	}
 	return codeErreur;
@@ -33,7 +30,6 @@ CodeErreur initialiserShifts(Shifts ** pDebShifts)
 
 CodeErreur detecterFichierShifts(bool *premierefois)
 {
-	printf("\n détecter fichier shifts \n");
 	CodeErreur codeErreur = PAS_D_ERREUR;
 	FILE *fInscriptions;
 	fopen_s(&fInscriptions, INSCRIPTION, "rb");
@@ -62,7 +58,6 @@ CodeErreur detecterFichierShifts(bool *premierefois)
 
 CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts)
 {
-	printf("\n charger dates org shifts \n");
 	FILE *pDebOrgShifts;
 	fopen_s(&pDebOrgShifts, DATESORGSHIFT, "rb");
 	CodeErreur codeErreur = PAS_D_ERREUR;
@@ -97,7 +92,6 @@ CodeErreur chargerDatesOrgShifts(Shifts **pDebShifts)
 
 CodeErreur chargementMembres(Membres membres[NB_MATRICULE_MAX],int nbMembre) // Question à poser taille tableau
 {
-	printf("\n charger membres \n");
 	
 	FILE *pDebFiMembres;
 	fopen_s(&pDebFiMembres, MEMBRE, "rb");
@@ -106,7 +100,6 @@ CodeErreur chargementMembres(Membres membres[NB_MATRICULE_MAX],int nbMembre) // 
 	Membres fiMembres;
 
 	fread_s(&fiMembres, sizeof(Membres), sizeof(Membres), 1, pDebFiMembres);
-	printf("ficher : matricule -> %d  nom -> %s prenom -> %s moyenne -> %d  \n \n", fiMembres.matricule, fiMembres.nom, fiMembres.prenom, fiMembres.moyPrec);
 	
 	while ((!feof(pDebFiMembres)) && (codeErreur == PAS_D_ERREUR) && (nbMembre < NB_MATRICULE_MAX))
 	{
@@ -128,9 +121,6 @@ CodeErreur chargementMembres(Membres membres[NB_MATRICULE_MAX],int nbMembre) // 
 		
 		nbMembre++;
 	}
-	printf("code erreur de la sortie de boucle chrgerMembre %d", codeErreur);
-	printf(" matricule -> %d  nom -> %s prenom -> %s moyenne -> %d  \n \n", membres[10].matricule, membres[10].nom, membres[10].prenom, membres[10].moyPrec);
-
 	fclose(pDebFiMembres);
 	return codeErreur;
 }

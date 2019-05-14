@@ -7,35 +7,36 @@
 #include "Gestion.h"
 
 
-int langueLue() // A optimiser et gestion cas d'erreur
+int langueLue()
 {
-	char l;
+	int l = 0;
 	bool selection = false;
-
 	while (!selection)
 	{
-		printf_s(" f : French \n");
-		printf_s(" e : English \n");
-		scanf_s("%c",&l, 1);
+		printf_s(" 1 : French \n");
+		printf_s(" 2 : English \n");
+		scanf_s("%d",&l, 1);
 
-		if ((l == 'e') || (l == 'f'))
+		if (l > 0)
 		{
-			selection = true;
-
-			if (l == 'e')
+			if (l < 3)
 			{
-				return 2;
+				selection = true;
+			}
+			else
+			{
+				printf_s("Selection incorrect \n Please select a right number \n");
 			}
 
-			return 1;
-		}
+		} 
 		else
 		{
-			printf_s("selection not correct \n Please select the right number \n");
-
+			printf_s("Selection incorrect \n Please select a right number \n");
 		}
+		
 	}
-
+	
+	return l;
 }
 
 void afficherMessage(Message *pLexique,int numMessage)
@@ -53,7 +54,7 @@ void afficherMessage(Message *pLexique,int numMessage)
 	}
 	else
 	{
-		printf("Message n'existe pas"); // A modifier
+		printf("Message n'existe pas"); // A modifier dans fichier
 	}
 
 	free(ptr);
@@ -71,13 +72,12 @@ int afficherMenu(Message *pLexique, int numMenu)
 
 	if (pMessage != NULL)
 	{
-		printf("%s", pMessage->texte); // Revoir gestion cas d'erreur
+		printf("\n %s \n", pMessage->texte); // Revoir gestion cas d'erreur
 	}
 
-	int tailleMenu = nbChoixMenu(pMessage,&numMenu);
+	int tailleMenu = nbChoixMenu(pMessage,numMenu);
 	pMessage = pMessage->pSuiv;
 	int nbChoix = 1;
-
 	while (pMessage != NULL && pMessage->num <= numMenu + tailleMenu)
 	{
 		printf("%d . %s", nbChoix, pMessage->texte);
@@ -88,20 +88,22 @@ int afficherMenu(Message *pLexique, int numMenu)
 	return (nbChoix - 1);
 }
 
-ChoixMenu choixObtenu(Message *pLexique, int numMessage)
+int choixObtenu(Message *pLexique, int numMessage)
 {
 	bool choixValide = false;
 	NumMessage numMenu;
+	int choix;
 	do
 	{
 	numMenu = MENU_PRINCIPAL;
-	int maxChoix = afficherMenu(pLexique, numMenu);
+	int maxChoix = afficherMenu(pLexique, numMenu); 
 	numMessage = OBT_CHOIX;
 	afficherMessage(pLexique, numMessage);
-	int choix = 0 ;
-	scanf_s('%d', choix);
-	choixValide = choix >= 1 && choix <= maxChoix;
-	if (! choixValide)
+	choix = 0 ;
+	scanf_s("%d", &choix,1);
+	
+	choixValide = (choix >= 1) && (choix <= maxChoix);
+	if (!choixValide)
 		{
 		CodeErreur codeErreur = MAUVAIS_CHOIX;
 		numMessage = PREMIER_ERREUR + numMessage;
@@ -109,7 +111,7 @@ ChoixMenu choixObtenu(Message *pLexique, int numMessage)
 		}
 
 	} while (!choixValide);
-	return numMessage;
+	return choix;
 }
 
 
@@ -218,7 +220,7 @@ void dialogues(Message **pLexique, Shifts **pDebShifts, Membres membres[NB_MATRI
 {
 	CodeErreur codeErreur = PAS_D_ERREUR;
 	NumMessage numMessage = MENU_PRINCIPAL;
-	ChoixMenu choix = choixObtenu(pLexique, numMessage);
+	int choix = choixObtenu(pLexique, numMessage);
 
 	while (choix != QUITTER)
 	{
@@ -232,7 +234,20 @@ void dialogues(Message **pLexique, Shifts **pDebShifts, Membres membres[NB_MATRI
 
 			break;
 
+		case SUPPRIMER_INSCRIPTION :
+
+			// supprimer Inscription
+
+			break;
+
+		case AFFICHER_INSCRIPTIONS :
+
+			//Afficher Isncription
+			break;
+
 		}
+
+		choix = choixObtenu(pLexique, numMessage);
 
 	}
 
